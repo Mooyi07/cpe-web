@@ -36,12 +36,37 @@
 
 form {
   background-color: #ffd06d;
-  width: 40%;
+  width: 50vh;
   color: #000000; 
+  height: 50vh;
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  padding-right: 43px;
 }
 
 form input {
-  width: 50%;
+  width: 100%;
+  height: 20px;
+  margin-top: 8px;
+  padding: 5px 5px 5px 5px;
+}
+
+form label {
+  text-align: left;
+  width: 100%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 104%;
+  margin-top: 20px;
+}
+
+form p {
+  text-align: left;
 }
 
 @media screen and (max-width: 500px) {
