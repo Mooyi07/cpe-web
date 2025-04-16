@@ -10,7 +10,7 @@ function App() {
       </header>
       <div className="display-form">
         <h1>Student Access Module</h1>
-        <form>
+        <form method='GET'>
           <h1>User Authentication</h1>
           <label for="username">Username :</label>
           <input type="text" id="username" name="username" placeholder="Username"></input>
@@ -20,8 +20,8 @@ function App() {
           <input type="date" id="birthday" name="birthday" placeholder="Birth Date"></input>
 
           <div className="button-container">
-            <button>Clear Entries</button>
-            <button>Login</button>
+            <button type="reset">Clear Entries</button>
+            <button type="submit">Login</button>
           </div>
 
           <p>Forgot you password? Click Here</p>
