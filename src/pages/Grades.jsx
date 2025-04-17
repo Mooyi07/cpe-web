@@ -3,9 +3,9 @@ import Layout from '../layouts/Layout';
 
 const Grades = () => {
     const grades = [
-      { subject: "Math", grade: "92" },
-      { subject: "Physics", grade: "88" },
-      { subject: "Programming", grade: "95" }
+      { subject: "Math", grade: "3", needed: "3.5" },
+      { subject: "Physics", grade: "3", needed: "3.5" },
+      { subject: "Programming", grade: "2", needed: "6" }
     ];
   
     return (
@@ -16,7 +16,11 @@ const Grades = () => {
                 <thead>
                     <tr>
                     <th className="py-2 px-4 border-b">Subject</th>
-                    <th className="py-2 px-4 border-b">Grade</th>
+                    <th className="py-2 px-4 border-b">Prelim</th>
+                    <th className="py-2 px-4 border-b">Midterm</th>
+                    <th className="py-2 px-4 border-b">Endterm</th>
+                    <th className="py-2 px-4 border-b">Average</th>
+                    <th className="py-2 px-4 border-b">Need</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,6 +28,10 @@ const Grades = () => {
                     <tr key={index}>
                         <td className="py-2 px-4 border-b">{item.subject}</td>
                         <td className="py-2 px-4 border-b">{item.grade}</td>
+                        <td className="py-2 px-4 border-b">{item.grade}</td>
+                        <td className="py-2 px-4 border-b">{item.grade}</td>
+                        <td className="py-2 px-4 border-b">{item.grade}</td>
+                        <td className="py-2 px-4 border-b">{item.needed}</td>
                     </tr>
                     ))}
                 </tbody>
