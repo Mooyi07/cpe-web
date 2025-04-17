@@ -3,37 +3,55 @@ import Layout from '../layouts/Layout';
 
 const Grades = () => {
     const baseGrades = [
-        { subject: "Math", prelim: 6.3, midterm: 7.3, endterm: 2.30 },
-        { subject: "Physics", prelim: 2.8, midterm: 4.2, endterm: null },
-        { subject: "Programming", prelim: 6.3, midterm: 1.5, endterm: null }
+        { subject: "Math", prelim: 4.5, midterm: 5, endterm: 5.5 },
+        { subject: "Physics", prelim: 5, midterm: 5, endterm: 4.5 },
+        { subject: "Programming", prelim: 6, midterm: 6, endterm: 6 }
     ];
 
     const passingGrade = 5.0;
-    const highestGrade = 10.0;
+    const highestGrade = 10.0; 
+
+    let borderlineCount = 0;
+    let hasHardFail = false;
 
     const grades = baseGrades.map(item => {
-    const { prelim, midterm, endterm } = item;
-
-    if (endterm !== null && endterm !== undefined) {
-        const average = (prelim * 0.3 + midterm * 0.3 + endterm * 0.4);
-        return {
-        ...item,
-        average: average.toFixed(2),
-        needed: '-',
-        status: average > passingGrade ? 'Fail' : 'Pass'
-        };
-    } else {
-        const need = (passingGrade - (prelim * 0.3 + midterm * 0.3)) / 0.4;
-        return {
-        ...item,
-        average: '-',
-        needed: need > highestGrade
-            ? 'Impossible'
-            : need.toFixed(2),
-        status: '-'
-        };
-    }
+        const { prelim, midterm, endterm } = item;
+      
+        if (endterm !== null && endterm !== undefined) {
+          const average = (prelim * 0.3 + midterm * 0.3 + endterm * 0.4);
+          const averageRounded = average.toFixed(2);
+      
+          if (average >= 6) hasHardFail = true;
+          else if (average > 5 && average < 6) borderlineCount++;
+      
+          return {
+            ...item,
+            average: averageRounded,
+            needed: '-',
+            status: average > passingGrade ? 'Fail' : 'Pass'
+          };
+        } else {
+          const need = (passingGrade - (prelim * 0.3 + midterm * 0.3)) / 0.4;
+          return {
+            ...item,
+            average: '-',
+            needed: need > highestGrade ? 'Impossible' : need.toFixed(2),
+            status: '-'
+          };
+        }
     });
+
+    let conversionNote = '';
+
+    if (hasHardFail) {
+        conversionNote = '4.6 - Not convertible';
+    } else if (borderlineCount === 1) {
+        conversionNote = '4.7';
+    } else if (borderlineCount <= 2) {
+        conversionNote = '4.8';
+    } else {
+        conversionNote = '4.9 - Automatically converted';
+    }
 
     return (
         <Layout>
