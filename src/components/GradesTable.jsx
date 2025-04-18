@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 
+const grades = [
+  { name: 'Math', prelim: 4.0, midterm: 5.5, endterm: 5.5 },
+  { name: 'Physics', prelim: 6.5, midterm: 4.0, endterm: 5.5 },
+  { name: 'Chemistry', prelim: 2.8, midterm: 3.0, endterm: 2.9 },
+];
+
 const GradesTable = ({ onGradesChange, showTable = false }) => {
-  const grades = [
-    { name: 'Math', prelim: 3.0, midterm: 3.5, endterm: 5.5 },
-    { name: 'Physics', prelim: 2.5, midterm: 2.0, endterm: 2.5 },
-    { name: 'Chemistry', prelim: 2.8, midterm: 3.0, endterm: 2.9 },
-  ];
 
   useEffect(() => {
     if (onGradesChange) {
@@ -19,7 +20,7 @@ const GradesTable = ({ onGradesChange, showTable = false }) => {
     return (prelim * 0.3 + midterm * 0.3 + endterm * 0.4).toFixed(2);
   };
 
-  const isFailed = (average) => parseFloat(average) > 5.0;
+  const isFailed = (average) => parseFloat(average) < 5.0;
 
   return (
     <table className="min-w-full border border-gray-300 rounded">
