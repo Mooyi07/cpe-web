@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
 import Layout from '../layouts/Layout';
-import GradesTable from '../components/GradesTable'; // import your new component
+import GradesTable from '../components/GradesTable';
 
 const Dashboard = () => {
   const [hasFailedSubject, setHasFailedSubject] = useState(null);
 
   const handleGradesChange = (grades) => {
-    const passingGrade = 5.0;
-
-    const hasFailed = grades.some(item => {
-      const { prelim, midterm, endterm } = item;
-      if (endterm !== null && endterm !== undefined) {
-        const average = (prelim * 0.3 + midterm * 0.3 + endterm * 0.4);
-        return average > passingGrade;
+    const hasFailed = grades.some(({ prelim, midterm, endterm }) => {
+      if (endterm != null) {
+        const avg = (prelim * 0.3 + midterm * 0.3 + endterm * 0.4);
+        return avg > 5.0;
       }
       return false;
     });
-
     setHasFailedSubject(hasFailed);
   };
 
@@ -27,7 +23,7 @@ const Dashboard = () => {
 
       {hasFailedSubject !== null && (
         <div className={`p-4 mb-4 rounded ${hasFailedSubject ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
-          <strong>Summary:</strong> {hasFailedSubject ? 'You have at least one failed subject.' : 'All subjects are passed!'}
+          <strong>Grades Summary:</strong> {hasFailedSubject ? 'You have at least one failed subject.' : 'All subjects are passed!'}
         </div>
       )}
 
