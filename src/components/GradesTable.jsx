@@ -12,7 +12,7 @@ const GradesTable = ({ onGradesChange, showTable = false }) => {
     if (onGradesChange) {
       onGradesChange(grades);
     }
-  }, [onGradesChange]);
+  }, [grades]);
 
   if (!showTable) return null;
 
