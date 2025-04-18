@@ -5,7 +5,8 @@ import GradesTable from '../components/GradesTable';
 const Grades = () => {
   return (
     <Layout>
-      <GradesTable />
+      <h2 className="text-2xl font-semibold mb-4">Your Grades</h2>
+      <GradesTable showTable />
     </Layout>
   );
 };
