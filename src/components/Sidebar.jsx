@@ -8,6 +8,7 @@ const Sidebar = () => {
         <Link to="/dashboard" className="block p-2 hover:bg-blue-100 rounded">Dashboard</Link>
         <Link to="/grades" className="block p-2 hover:bg-blue-100 rounded">Grades</Link>
         <Link to="/schedule" className="block p-2 hover:bg-blue-100 rounded">Schedule</Link>
+        <Link to="/announcement" className="block p-2 hover:bg-blue-100 rounded">Announcement</Link>
         {/* Add more links as needed */}
       </nav>
     </aside>

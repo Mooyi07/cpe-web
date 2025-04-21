@@ -3,6 +3,7 @@ import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 import Grades from "../pages/Grades";
 import Schedule from "../pages/Schedule";
+import Announcement from "../pages/Announcement";
 import Layout from "../components/Layout";  // import Layout
 
 const AppRoutes = () => {
@@ -14,6 +15,7 @@ const AppRoutes = () => {
       <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
       <Route path="/grades" element={<Layout><Grades /></Layout>} />
       <Route path="/schedule" element={<Layout><Schedule /></Layout>} />
+      <Route path="/announcement" element={<Layout><Announcement /></Layout>} />
       {/* Add more routes as needed */}
     </Routes>
   );

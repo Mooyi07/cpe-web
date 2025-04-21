@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 const grades = [
   { name: 'Math', prelim: 4.0, midterm: 5.5, endterm: 5.5 },
   { name: 'Physics', prelim: 6.5, midterm: 4.0, endterm: 5.5 },
-  { name: 'Chemistry', prelim: 2.8, midterm: 3.0, endterm: 2.9 },
+  { name: 'Chemistry', prelim: 2.8, midterm: 4.0, endterm: 6.9 },
 ];
 
 const GradesTable = ({ onGradesChange, showTable = false }) => {
