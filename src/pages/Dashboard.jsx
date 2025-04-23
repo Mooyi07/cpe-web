@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Layout from '../layouts/Layout';
 import GradesTable from '../components/GradesTable';
+import schedule from '../data/scheduleData';
 
 const Dashboard = () => {
   const [failedSubjects, setFailedSubjects] = useState([]);
@@ -27,7 +28,7 @@ const Dashboard = () => {
     },
   ]);
 
-  
+
 
   return (
     <Layout>
