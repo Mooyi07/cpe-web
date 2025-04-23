@@ -2,28 +2,128 @@ import React from 'react';
 import Layout from '../layouts/Layout';
 
 const Schedule = () => {
-    const schedule = [
-      { day: "Monday", subject: "Math", time: "8:00 AM - 9:30 AM" },
-      { day: "Wednesday", subject: "Programming", time: "10:00 AM - 11:30 AM" },
-      { day: "Friday", subject: "Physics", time: "1:00 PM - 2:30 PM" },
-    ];
-  
-    return (
-      <Layout>
-        <div className="p-4">
-          <h2 className="text-xl font-semibold mb-4">Your Schedule</h2>
-          <ul className="space-y-2">
-            {schedule.map((item, index) => (
-              <li key={index} className="p-4 bg-white rounded shadow">
-                <p className="font-medium">{item.subject}</p>
-                <p>{item.day} — {item.time}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Layout>
-    );
+  const schedule = [
+    { day: "Monday", subject: "Math", time: "8:00 AM - 9:30 AM" },
+    { day: "Wednesday", subject: "Programming", time: "10:00 AM - 11:30 AM" },
+    { day: "Friday", subject: "Physics", time: "1:00 PM - 2:30 PM" },
+  ];
+
+  const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+
+  // Generate time slots in 30-minute intervals
+  const generateTimeSlots = () => {
+    const slots = [];
+    let start = new Date("1970-01-01T08:00:00");
+    const end = new Date("1970-01-01T20:30:00");
+
+    while (start <= end) {
+      const hour = start.getHours();
+      const minutes = start.getMinutes().toString().padStart(2, '0');
+      const suffix = hour >= 12 ? 'PM' : 'AM';
+      const displayHour = hour > 12 ? hour - 12 : hour;
+      const timeStr = `${displayHour}:${minutes} ${suffix}`;
+      slots.push(timeStr);
+      start.setMinutes(start.getMinutes() + 30);
+    }
+
+    return slots;
   };
-  
-  export default Schedule;
-  
+
+  const timeSlots = generateTimeSlots();
+
+  // Convert time string to Date object
+  const parseTime = str => new Date(`1970-01-01T${convertTo24Hr(str)}`);
+
+  const convertTo24Hr = time => {
+    const [timePart, modifier] = time.split(' ');
+    let [hours, minutes] = timePart.split(':').map(Number);
+
+    if (modifier === 'PM' && hours !== 12) hours += 12;
+    if (modifier === 'AM' && hours === 12) hours = 0;
+
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:00`;
+  };
+
+  // Determine if a time slot starts a subject block
+  const getScheduleMap = () => {
+    const map = {};
+
+    weekdays.forEach(day => {
+      map[day] = Array(timeSlots.length).fill(null);
+    });
+
+    schedule.forEach(({ day, subject, time }) => {
+      const [startStr, endStr] = time.split(" - ");
+      const startTime = parseTime(startStr);
+      const endTime = parseTime(endStr);
+
+      const startIndex = timeSlots.findIndex(t => parseTime(t).getTime() === startTime.getTime());
+      const endIndex = timeSlots.findIndex(t => parseTime(t).getTime() === endTime.getTime());
+
+      map[day][startIndex] = { subject, span: endIndex - startIndex };
+
+      // Fill rest with placeholder to skip rendering
+      for (let i = startIndex + 1; i < endIndex; i++) {
+        map[day][i] = "skip";
+      }
+    });
+
+    return map;
+  };
+
+  const scheduleMap = getScheduleMap();
+
+  const getColor = subject => {
+    const colors = {
+      Math: "bg-blue-200",
+      Programming: "bg-green-200",
+      Physics: "bg-yellow-200",
+    };
+    return colors[subject] || "bg-gray-100";
+  };
+
+  return (
+    <Layout>
+      <div className="p-4 overflow-x-auto">
+        <h2 className="text-xl font-semibold mb-4">Weekly Schedule</h2>
+        <table className="min-w-full table-fixed border border-gray-300">
+          <thead>
+            <tr>
+              <th className="border border-gray-300 p-2 w-32">Time</th>
+              {weekdays.map(day => (
+                <th key={day} className="border border-gray-300 p-2">{day}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {timeSlots.map((time, rowIndex) => (
+              <tr key={rowIndex}>
+                <td className="border border-gray-300 p-2">{time}</td>
+                {weekdays.map(day => {
+                  const cell = scheduleMap[day][rowIndex];
+
+                  if (cell === "skip") return null;
+                  if (cell && typeof cell === "object") {
+                    return (
+                      <td
+                        key={day}
+                        className={`border border-gray-300 p-2 text-center align-middle ${getColor(cell.subject)}`}
+                        rowSpan={cell.span}
+                      >
+                        {cell.subject}
+                      </td>
+                    );
+                  }
+
+                  return <td key={day} className="border border-gray-300 p-2 text-center" />;
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </Layout>
+  );
+};
+
+export default Schedule;
