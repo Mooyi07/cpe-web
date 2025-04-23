@@ -10,7 +10,7 @@ const Schedule = () => {
     { day: "Wednesday", subject_code: "CpE 234", subject: "Software Design", prof: "Apawan", room: "R 19", time: "8:15 AM - 12:00 PM" },
     { day: "Wednesday", subject_code: "CpE 234A", subject: "Logic Circuits and Design", prof: "Lumauag", room: "R 19", time: "1:00 PM - 4:45 PM" },
     { day: "Thursday", subject_code: "BES 232", subject: "Dynamics of Rigid Bodies", prof: "Bergola", room: "R 19", time: "9:30 AM - 12:00 PM" },
-    { day: "Thursday", subject_code: "GEC 6", subject: "Art Appreciation", prof: "Discutido", room: "R 19", time: "12:00 PM - 4:45 PM" },
+    { day: "Thursday", subject_code: "GEC 6", subject: "Art Appreciation", prof: "Discutido", room: "R 19", time: "1:00 PM - 4:45 PM" },
     { day: "Friday", subject_code: "CpE 234", subject: "Software Design", prof: "Apawan", room: "ECL", time: "8:15 AM - 12:00 PM" },
     { day: "Friday", subject_code: "CpE 223", subject: "Computer Programming 5", prof: "Quintanilla", room: "ECL", time: "1:00 PM - 3:30 PM" },
     { day: "Monday", subject: "Lunch Break", time: "12:00 PM - 1:00 PM" },
@@ -26,7 +26,7 @@ const Schedule = () => {
     const slots = [];
     let current = new Date("1970-01-01T08:00:00");
     const end = new Date("1970-01-01T20:30:00");
-  
+
     while (current <= end) {
       const hour = current.getHours();
       const mins = current.getMinutes().toString().padStart(2, "0");
@@ -35,19 +35,18 @@ const Schedule = () => {
       slots.push(`${displayHour}:${mins} ${suffix}`);
       current.setMinutes(current.getMinutes() + 15);
     }
-  
     return slots;
   };
   
 
   const timeSlots = generateTimeSlots();
 
-  const parseTime = timeStr => {
-    const [time, period] = timeStr.split(" ");
-    let [hours, minutes] = time.split(":").map(Number);
-    if (period === "PM" && hours !== 12) hours += 12;
-    if (period === "AM" && hours === 12) hours = 0;
-    return hours * 60 + minutes;
+  const normalizeTime = time => {
+    const [hours, minutes] = time.match(/\d+/g).map(Number);
+    const isPM = time.includes("PM");
+    let h = hours % 12;
+    if (isPM) h += 12;
+    return h * 60 + minutes;
   };
 
   const scheduleMap = {};
@@ -55,29 +54,29 @@ const Schedule = () => {
     scheduleMap[day] = Array(timeSlots.length).fill(null);
   });
 
-  schedule.forEach(item => {
-    const [startStr, endStr] = item.time.split(" - ");
-    const start = parseTime(startStr);
-    const end = parseTime(endStr);
+  schedule.forEach(({ day, subject_code, subject, prof, room, time }) => {
+    const [startStr, endStr] = time.split(" - ");
+    const startMinutes = normalizeTime(startStr);
+    const endMinutes = normalizeTime(endStr);
 
-    const startIndex = timeSlots.findIndex(slot => parseTime(slot) >= start);
-    const endIndex = timeSlots.findIndex(slot => parseTime(slot) >= end);
+    const startIndex = timeSlots.findIndex(slot => normalizeTime(slot) === startMinutes);
+    const endIndex = timeSlots.findIndex(slot => normalizeTime(slot) === endMinutes);
 
-    const span = endIndex - startIndex;
-    const content = item.subject === "Lunch Break"
-      ? "Lunch Break"
-      : `${item.subject_code}\n${item.subject}\nProf. ${item.prof}\nRoom: ${item.room}`;
+    if (startIndex === -1 || endIndex === -1) return;
 
-    scheduleMap[item.day][startIndex] = {
-      content,
-      span,
-      subject: item.subject,
+    scheduleMap[day][startIndex] = {
+      content: subject === "Lunch Break"
+        ? "Lunch Break"
+        : `${subject_code}\n${subject}\nProf. ${prof}\nRoom: ${room}`,
+      span: endIndex - startIndex,
+      subject,
     };
 
     for (let i = startIndex + 1; i < endIndex; i++) {
-      scheduleMap[item.day][i] = "skip";
+      scheduleMap[day][i] = "skip";
     }
   });
+
 
   const getColor = subject => {
     const colors = {
@@ -100,7 +99,7 @@ const Schedule = () => {
         <table className="min-w-full table-fixed border border-gray-300 text-sm">
           <thead>
             <tr>
-              <th className="border border-gray-300 p-2 w-32">Time</th>
+              <th className="w-[100px] border border-gray-300 p-2 w-32">Time</th>
               {weekdays.map(day => (
                 <th key={day} className="border border-gray-300 p-2">{day}</th>
               ))}
@@ -117,7 +116,7 @@ const Schedule = () => {
                     return (
                       <td
                         key={day}
-                        className={`border border-gray-300 p-2 whitespace-pre-line align-middle ${getColor(cell.subject)}`}
+                        className={`w-[100px] border border-gray-300 p-2 whitespace-pre-line align-middle ${getColor(cell.subject)}`}
                         rowSpan={cell.span}
                       >
                         {cell.content}
