@@ -26,18 +26,19 @@ const Schedule = () => {
     const slots = [];
     let current = new Date("1970-01-01T08:00:00");
     const end = new Date("1970-01-01T20:30:00");
-
+  
     while (current <= end) {
       const hour = current.getHours();
       const mins = current.getMinutes().toString().padStart(2, "0");
       const suffix = hour >= 12 ? "PM" : "AM";
-      const displayHour = hour > 12 ? hour - 12 : hour;
+      const displayHour = hour > 12 ? hour - 12 : hour === 0 ? 12 : hour;
       slots.push(`${displayHour}:${mins} ${suffix}`);
-      current.setMinutes(current.getMinutes() + 30);
+      current.setMinutes(current.getMinutes() + 15);
     }
-
+  
     return slots;
   };
+  
 
   const timeSlots = generateTimeSlots();
 
