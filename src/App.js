@@ -12,7 +12,9 @@ import Announcement from './pages/Announcement'; // Announcement route
 import './tailwind.output.css';
 
 function App() {
+
   return (
+    
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />

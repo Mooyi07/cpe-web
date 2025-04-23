@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../layouts/Layout';
-import schedule from '../data/scheduleData';
+import { fetchScheduleData } from '../data/scheduleData'; // Import the fetch function
 
 const Schedule = () => {
+  const [schedule, setSchedule] = useState([]);
+
+  useEffect(() => {
+    const getSchedule = async () => {
+      const scheduleData = await fetchScheduleData(); // Fetch data and store it in constant
+      setSchedule(scheduleData); // Set the data into state
+    };
+    getSchedule();
+  }, []); // Fetch the schedule data
 
   const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
