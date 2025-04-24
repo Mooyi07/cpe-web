@@ -25,7 +25,7 @@ const GradesTable = ({ onGradesChange, showTable = false }) => {
 
   const isFailed = (average) => parseFloat(average) < 5.0;
 
-  const convertible = (average) => true;
+  const convertible = (average, countAver) => parseFloat(average) >= 4.89 && parseFloat(average) < 5.0 ? true : false;
 
   return (
     <table className="min-w-full border border-gray-300 rounded">
@@ -44,7 +44,7 @@ const GradesTable = ({ onGradesChange, showTable = false }) => {
         {grades.map((grade, idx) => {
           const average = getFinalAverage(grade);
           const textColor = isFailed(average) ? 'text-red-600' : 'text-green-600';
-          const convertStatus = convertible(average) ? 'Convertible' : 'Failed';
+          const convertStatus = convertible(average) ? 'Convertible' : 'Not Convertible';
 
           return (
             <tr key={idx} className="text-center">
