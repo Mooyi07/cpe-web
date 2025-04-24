@@ -29,7 +29,8 @@ const GradesTable = ({ onGradesChange, showTable = false }) => {
     <table className="min-w-full border border-gray-300 rounded">
       <thead className="bg-gray-100">
         <tr>
-          <th className="p-2 border">Subject</th>
+          <th className="p-2 border">Subject Code</th>
+          <th className="p-2 border">Subject Description</th>
           <th className="p-2 border">Prelim</th>
           <th className="p-2 border">Midterm</th>
           <th className="p-2 border">Endterm</th>
@@ -43,7 +44,8 @@ const GradesTable = ({ onGradesChange, showTable = false }) => {
 
           return (
             <tr key={idx} className="text-center">
-              <td className="p-2 border">{grade.name}</td>
+              <td className="text-left p-2 border">{grade.subCode}</td>
+              <td className="text-left p-2 border">{grade.name}</td>
               <td className="p-2 border">{grade.prelim}</td>
               <td className="p-2 border">{grade.midterm}</td>
               <td className="p-2 border">{grade.endterm}</td>
