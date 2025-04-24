@@ -25,9 +25,7 @@ const GradesTable = ({ onGradesChange, showTable = false }) => {
 
   const isFailed = (average) => parseFloat(average) < 5.0;
 
-  const convertible = ({average}) => {
-    const convert = (average < 4.8 && average < 5.0) ? "Convertible" : "Not Convertible";
-  };
+  const convertible = (average) => true;
 
   return (
     <table className="min-w-full border border-gray-300 rounded">
@@ -39,12 +37,14 @@ const GradesTable = ({ onGradesChange, showTable = false }) => {
           <th className="p-2 border">Midterm</th>
           <th className="p-2 border">Endterm</th>
           <th className="p-2 border">Final Average</th>
+          <th className="p-2 border">Grade Status</th>
         </tr>
       </thead>
       <tbody>
         {grades.map((grade, idx) => {
           const average = getFinalAverage(grade);
           const textColor = isFailed(average) ? 'text-red-600' : 'text-green-600';
+          const convertStatus = convertible(average) ? 'Convertible' : 'Failed';
 
           return (
             <tr key={idx} className="text-center">
@@ -53,9 +53,8 @@ const GradesTable = ({ onGradesChange, showTable = false }) => {
               <td className="p-2 border">{grade.prelim}</td>
               <td className="p-2 border">{grade.midterm}</td>
               <td className="p-2 border">{grade.endterm}</td>
-              <td className={`p-2 border font-semibold ${textColor}`}>
-                {average}
-              </td>
+              <td className={`p-2 border font-semibold ${textColor}`}>{average}</td>
+              <td className={`p-2 border font-semibold`}>{convertStatus}</td>
             </tr>
           );
         })}
