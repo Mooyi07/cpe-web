@@ -25,6 +25,8 @@ const GradesTable = ({ onGradesChange, showTable = false }) => {
 
   const isFailed = (average) => parseFloat(average) < 5.0;
 
+  // Add a printable grade to be exposed and to be signed by the instructor to registrar
+
   const convertible = (average, countAver) => parseFloat(average) >= 4.89 && parseFloat(average) < 5.0 ? true : false;
 
   return (
