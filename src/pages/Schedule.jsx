@@ -72,11 +72,24 @@ const Schedule = () => {
   });
 
   const exportSched = () => {
-    const csvContent = `data:text/csv;charset=utf-8,${schedule.map(e => `${e.day},${e.subject_code},${e.subject},${e.prof},${e.room},${e.time}`).join("\n")}`;
+    const csvContent = `data:text/csv;charset=utf-8,${
+      schedule.map(
+        e => `${e.day},
+              ${e.subject_code},
+              ${e.subject},
+              ${e.prof},
+              ${e.room},
+              ${e.time}`
+            ).join("\n")
+    }`;
+    const csvHeader = "Day,Subject Code,Subject,Professor,Room,Time\n";
     const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "schedule.csv");    document.body.appendChild(link);
-    link.click();    document.body.removeChild(link);
+    const link = document.createElement("a");   
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "schedule.csv");    
+    document.body.appendChild(link);
+    link.click();    
+    document.body.removeChild(link);
   };    
 
   const getColor = subject => {
