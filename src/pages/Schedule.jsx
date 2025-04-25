@@ -17,11 +17,33 @@ const Schedule = () => {
 
   const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
-  const generateTimeSlots = () => {
+  const normalizeTime = time => {
+    const [hours, minutes] = time.match(/\d+/g).map(Number);
+    const isPM = time.includes("PM");
+    let h = hours % 12;
+    if (isPM) h += 12;
+    return h * 60 + minutes;
+  };
+
+  const generateTimeSlots = (schedule) => {
     const slots = [];
     let current = new Date("1970-01-01T08:00:00");
-    const end = new Date("1970-01-01T20:30:00");
-
+  
+    // Find latest end time in minutes
+    let maxMinutes = 0;
+    schedule.forEach(({ time }) => {
+      const [, endStr] = time.split(" - ");
+      const endMinutes = normalizeTime(endStr);
+      if (endMinutes > maxMinutes) {
+        maxMinutes = endMinutes;
+      }
+    });
+  
+    // Convert maxMinutes to Date object
+    const endHour = Math.floor(maxMinutes / 60);
+    const endMin = maxMinutes % 60;
+    const end = new Date(`1970-01-01T${endHour.toString().padStart(2, "0")}:${endMin.toString().padStart(2, "0")}:00`);
+  
     while (current <= end) {
       const hour = current.getHours();
       const mins = current.getMinutes().toString().padStart(2, "0");
@@ -30,19 +52,11 @@ const Schedule = () => {
       slots.push(`${displayHour}:${mins} ${suffix}`);
       current.setMinutes(current.getMinutes() + 15);
     }
+  
     return slots;
   };
   
-
-  const timeSlots = generateTimeSlots();
-
-  const normalizeTime = time => {
-    const [hours, minutes] = time.match(/\d+/g).map(Number);
-    const isPM = time.includes("PM");
-    let h = hours % 12;
-    if (isPM) h += 12;
-    return h * 60 + minutes;
-  };
+  const timeSlots = generateTimeSlots(schedule);
 
   const scheduleMap = {};
   weekdays.forEach(day => {
