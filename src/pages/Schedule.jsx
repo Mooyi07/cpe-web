@@ -71,6 +71,13 @@ const Schedule = () => {
     }
   });
 
+  const exportSched = () => {
+    const csvContent = `data:text/csv;charset=utf-8,${schedule.map(e => `${e.day},${e.subject_code},${e.subject},${e.prof},${e.room},${e.time}`).join("\n")}`;
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "schedule.csv");    document.body.appendChild(link);
+    link.click();    document.body.removeChild(link);
+  };    
 
   const getColor = subject => {
     const colors = {
@@ -89,7 +96,10 @@ const Schedule = () => {
   return (
     <Layout>
       <div className="p-4 overflow-x-auto">
-        <h2 className="text-xl font-semibold mb-4">Weekly Schedule</h2>
+        <div className='flex justify-between items-center mb-4'>
+          <h2 className="text-xl font-semibold">Weekly Schedule</h2>
+          <button onClick={exportSched} className="bg-blue-500 text-white rounded p-2">Export Schedule</button>
+        </div>
         <table className="min-w-full table-fixed border border-gray-300 text-sm">
           <thead>
             <tr>
