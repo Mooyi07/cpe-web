@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../layouts/Layout';
 import { fetchScheduleData } from '../data/scheduleData'; // Import the fetch function
+import html2canvas from 'html2canvas';
 
 const Schedule = () => {
   const [schedule, setSchedule] = useState([]);
@@ -72,24 +73,14 @@ const Schedule = () => {
   });
 
   const exportSched = () => {
-    const csvContent = `data:text/csv;charset=utf-8,${
-      schedule.map(
-        e => `${e.day},
-              ${e.subject_code},
-              ${e.subject},
-              ${e.prof},
-              ${e.room},
-              ${e.time}`
-            ).join("\n")
-    }`;
-    const csvHeader = "Day,Subject Code,Subject,Professor,Room,Time\n";
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");   
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "schedule.csv");    
-    document.body.appendChild(link);
-    link.click();    
-    document.body.removeChild(link);
+    const element = document.getElementById('sched');
+    const opt = {
+      margin: 1,
+      filename: 'schedule.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
   };    
 
   const getColor = subject => {
@@ -113,7 +104,7 @@ const Schedule = () => {
           <h2 className="text-xl font-semibold">Weekly Schedule</h2>
           <button onClick={exportSched} className="bg-blue-500 text-white rounded p-2">Export Schedule</button>
         </div>
-        <table className="min-w-full table-fixed border border-gray-300 text-sm">
+        <table id='sched' className="min-w-full table-fixed border border-gray-300 text-sm">
           <thead>
             <tr>
               <th className="w-[100px] border border-gray-300 p-2 w-32">Time</th>
