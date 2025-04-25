@@ -5,6 +5,7 @@ import { fetchScheduleData } from '../data/scheduleData'; // Import the fetch fu
 const Schedule = () => {
   const [schedule, setSchedule] = useState([]);
 
+  // add exportable scedule
   useEffect(() => {
     const getSchedule = async () => {
       const scheduleData = await fetchScheduleData(); // Fetch data and store it in constant
