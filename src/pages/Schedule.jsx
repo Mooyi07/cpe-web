@@ -72,16 +72,22 @@ const Schedule = () => {
     }
   });
 
+  
   const exportSched = () => {
     const element = document.getElementById('sched');
-    const opt = {
-      margin: 1,
-      filename: 'schedule.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
-  };    
+  
+    html2canvas(element, {
+      scale: 2,
+      scrollY: -window.scrollY, // prevent scroll from affecting capture
+      windowWidth: element.scrollWidth,
+      windowHeight: element.scrollHeight
+    }).then(canvas => {
+      const link = document.createElement('a');
+      link.download = 'schedule.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+  };  
 
   const getColor = subject => {
     const colors = {
