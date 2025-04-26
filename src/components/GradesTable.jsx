@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+// List of grades for each subject
 const grades = [
   { subCode: 'CPE233-V', name: 'Computer Programming 5', prelim: 5.9, midterm: 4.9, endterm: 6.6 },
   { subCode: 'CPE232-V', name: 'Computer Engineering Drafting and Design', prelim: 6.8, midterm: 5.7, endterm: 6.0 },
@@ -9,6 +10,12 @@ const grades = [
   { subCode: 'MATH333-V', name: 'Numerical Methods', prelim: 7, midterm: 7, endterm: 3.8 },
 ];
 
+/**
+ * GradesTable Component
+ * Displays a table of student grades with computed final averages and grade status.
+ * @param {Function} onGradesChange - Callback function to send grades back to parent.
+ * @param {boolean} showTable - Determines whether to show the table or not.
+ */
 const GradesTable = ({ onGradesChange, showTable = false }) => {
   const [belowSixCount, setBelowSixCount] = useState(0);
 
@@ -19,21 +26,47 @@ const GradesTable = ({ onGradesChange, showTable = false }) => {
     countBelowSixSubjects();
   }, []);
 
+  /**
+   * Calculates the final average based on prelim (30%), midterm (30%), and endterm (40%).
+   * @param {Object} param0 - Grade object with prelim, midterm, endterm.
+   * @returns {string} Final average as a string with 2 decimal places.
+   */
   const getFinalAverage = ({ prelim, midterm, endterm }) => {
     return (prelim * 0.3 + midterm * 0.3 + endterm * 0.4).toFixed(2);
   };
 
+  /**
+   * Checks if the given final average is considered a failing grade.
+   * @param {string|number} average - Final average.
+   * @returns {boolean} True if failed, otherwise false.
+   */
   const isFailed = (average) => parseFloat(average) < 5.0;
 
+  /**
+   * Checks if the final average is between 5.0 and 6.0 (inclusive of 5.0).
+   * @param {string|number} average - Final average.
+   * @returns {boolean} True if below 6, otherwise false.
+   */
   const isBelowSix = (average) => parseFloat(average) > 4.99 && parseFloat(average) < 6.0;
 
+  /**
+   * Determines if a failing grade is "convertible" based on certain rules:
+   * - Average > 4.89: Convertible
+   * - Average between 4.8–4.9 with less than 4 subjects below 6: Convertible
+   * - Average between 4.7–4.8 with less than 3 subjects below 6: Convertible
+   * @param {string|number} average - Final average.
+   * @param {number} belowSixCount - Number of subjects below 6.0.
+   * @returns {boolean} True if convertible, otherwise false.
+   */
   const convertible = (average, belowSixCount) => {
     const avg = parseFloat(average);
     return (avg > 4.89) || (avg > 4.79 && avg < 4.9 && belowSixCount < 4) || (avg > 4.69 && avg < 4.8 && belowSixCount < 3);
   };
-  
-  
 
+  /**
+   * Counts how many subjects have a final average below 6.0.
+   * Updates the `belowSixCount` state.
+   */
   const countBelowSixSubjects = () => {
     const belowSix = grades.filter((grade) => isBelowSix(getFinalAverage(grade))).length;
     setBelowSixCount(belowSix);
