@@ -54,10 +54,24 @@ cpe-portal/
 ├── public/
 │   └── index.html
 ├── src/
+│   ├── assets/
+│   ├── layouts/
+│   │   └── layout.jsx
+│   ├── pages/
+│   │   ├── Announcement.jsx
+│   │   ├── Dashboard.jsx
+│   │   ├── Grades.jsx
+│   │   ├── Login.jsx
+│   │   └── Schedule.jsx
 │   ├── components/
+│   │   ├── CodePlayGround/
+│   │   ├── header.jsx
+│   │   ├── PostingTab.jsx
+│   │   ├── Sidebar.jsx
 │   │   └── GradesTable.jsx
 │   ├── App.jsx
 │   ├── index.js
+│   ├── firebase.js
 │   └── styles/
 │       └── tailwind.css
 ├── package.json
@@ -79,19 +93,19 @@ cpe-portal/
 
 - **Future Features (Coming Soon)**
   - 🔒 Login/Signup authentication
-  - 📝 Announcements page
+  - 📝 Announcements page (On Development)
   - 📁 Student Profile Management
   - 📜 Certificate Generator
 
 ---
 
-## 📸 Screenshot
+<!-- ## 📸 Screenshot
 
 > (You can add a screenshot here!)  
 > Example:
 > ![App Screenshot](./screenshot.png)
 
----
+--- -->
 
 ## 🧠 Contributing
 
@@ -115,10 +129,3 @@ This project is licensed under the [MIT License](LICENSE).
 ---
 
 > _“Empowering Computer Engineers, one portal at a time.”_ 🖥️🚀
-```
-
----
-
-Would you also like me to make a **README version** with **badges** (like `Built with React`, `License: MIT`, `Version 1.0.0` badges)? 🚀  
-It would look super clean for GitHub 📄✨!  
-(Just say "yes badges" if you want!)
