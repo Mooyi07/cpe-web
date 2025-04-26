@@ -127,7 +127,7 @@ const Schedule = () => {
         <table id='sched' className="min-w-full table-fixed border border-gray-300 text-sm">
           <thead>
             <tr>
-              <th className="w-[100px] border border-gray-300 p-2 w-32">Time</th>
+              <th className="w-[10px] border border-gray-300 p-2 w-32">Time</th>
               {weekdays.map(day => (
                 <th key={day} className="border border-gray-300 p-2">{day}</th>
               ))}
