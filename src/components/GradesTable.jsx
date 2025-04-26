@@ -29,13 +29,9 @@ const GradesTable = ({ onGradesChange, showTable = false }) => {
 
   const convertible = (average, belowSixCount) => {
     const avg = parseFloat(average);
-  
-    if (avg > 4.89) return true;
-    if (avg > 4.79 && avg < 4.9 && belowSixCount < 4) return true;
-    if (avg > 4.69 && avg < 4.8 && belowSixCount < 3) return true;
-  
-    return false;
+    return (avg > 4.89) || (avg > 4.79 && avg < 4.9 && belowSixCount < 4) || (avg > 4.69 && avg < 4.8 && belowSixCount < 3);
   };
+  
   
 
   const countBelowSixSubjects = () => {
