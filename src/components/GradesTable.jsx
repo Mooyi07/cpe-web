@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const grades = [
   { subCode: 'CPE233-V', name: 'Computer Programming 5', prelim: 5.9, midterm: 4.9, endterm: 6.6 },
@@ -10,14 +10,14 @@ const grades = [
 ];
 
 const GradesTable = ({ onGradesChange, showTable = false }) => {
+  const [belowSixCount, setBelowSixCount] = useState(0);
 
   useEffect(() => {
     if (onGradesChange) {
       onGradesChange(grades);
     }
-  }, [grades]);
-
-  if (!showTable) return null;
+    countBelowSixSubjects();
+  }, []);
 
   const getFinalAverage = ({ prelim, midterm, endterm }) => {
     return (prelim * 0.3 + midterm * 0.3 + endterm * 0.4).toFixed(2);
@@ -25,43 +25,63 @@ const GradesTable = ({ onGradesChange, showTable = false }) => {
 
   const isFailed = (average) => parseFloat(average) < 5.0;
 
-  // Add a printable grade to be exposed and to be signed by the instructor to registrar
+  const isBelowSix = (average) => parseFloat(average) > 4.99 && parseFloat(average) < 6.0;
 
-  const convertible = (average, countAver) => parseFloat(average) >= 4.89 && parseFloat(average) < 5.0 ? true : false;
+  const convertible = (average, belowSixCount) => {
+    const avg = parseFloat(average);
+  
+    if (avg > 4.89) return true;
+    if (avg > 4.79 && avg < 4.9 && belowSixCount < 4) return true;
+    if (avg > 4.69 && avg < 4.8 && belowSixCount < 3) return true;
+  
+    return false;
+  };
+  
+
+  const countBelowSixSubjects = () => {
+    const belowSix = grades.filter((grade) => isBelowSix(getFinalAverage(grade))).length;
+    setBelowSixCount(belowSix);
+  };
+
+  if (!showTable) return null;
 
   return (
-    <table className="min-w-full border border-gray-300 rounded">
-      <thead className="bg-gray-100">
-        <tr>
-          <th className="p-2 border">Subject Code</th>
-          <th className="p-2 border">Subject Description</th>
-          <th className="p-2 border">Prelim</th>
-          <th className="p-2 border">Midterm</th>
-          <th className="p-2 border">Endterm</th>
-          <th className="p-2 border">Final Average</th>
-          <th className="p-2 border">Grade Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        {grades.map((grade, idx) => {
-          const average = getFinalAverage(grade);
-          const textColor = isFailed(average) ? 'text-red-600' : 'text-green-600';
-          const convertStatus = convertible(average) ? 'Convertible' : 'Not Convertible';
+    <div>
+      <table className="min-w-full border border-gray-300 rounded mb-4">
+        <thead className="bg-gray-100">
+          <tr>
+            <th className="p-2 border">Subject Code</th>
+            <th className="p-2 border">Subject Description</th>
+            <th className="p-2 border">Prelim</th>
+            <th className="p-2 border">Midterm</th>
+            <th className="p-2 border">Endterm</th>
+            <th className="p-2 border">Final Average</th>
+            <th className="p-2 border">Grade Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {grades.map((grade, idx) => {
+            const average = getFinalAverage(grade);
+            const textColor = isFailed(average) ? 'text-red-600' : 'text-green-600';
+            const convertStatus = isFailed(average)
+              ? (convertible(average, belowSixCount) ? 'Convertible' : 'Not Convertible')
+              : 'Passing Grade';
 
-          return (
-            <tr key={idx} className="text-center">
-              <td className="text-left p-2 border">{grade.subCode}</td>
-              <td className="text-left p-2 border">{grade.name}</td>
-              <td className="p-2 border">{grade.prelim}</td>
-              <td className="p-2 border">{grade.midterm}</td>
-              <td className="p-2 border">{grade.endterm}</td>
-              <td className={`p-2 border font-semibold ${textColor}`}>{average}</td>
-              <td className={`p-2 border font-semibold`}>{convertStatus}</td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+            return (
+              <tr key={idx} className="text-center">
+                <td className="text-left p-2 border">{grade.subCode}</td>
+                <td className="text-left p-2 border">{grade.name}</td>
+                <td className="p-2 border">{grade.prelim}</td>
+                <td className="p-2 border">{grade.midterm}</td>
+                <td className="p-2 border">{grade.endterm}</td>
+                <td className={`p-2 border font-semibold ${textColor}`}>{average}</td>
+                <td className="p-2 border font-semibold">{convertStatus}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
