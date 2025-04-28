@@ -45,7 +45,7 @@ function PostingTab({ posts = [] }) {
 
       {/* Modal */}
       {selectedPost && (
-          <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 transition-opacity duration-300">
+          <div className="fixed inset-0 bg-gray-950 bg-opacity-40 flex items-center justify-center z-50 transition-opacity duration-300">
             <div className="bg-white rounded-2xl p-6 w-11/12 md:w-2/3 lg:w-1/2 shadow-lg relative transform scale-95 opacity-0 animate-modal-pop">
               <button
                 onClick={() => setSelectedPost(null)}
@@ -55,7 +55,7 @@ function PostingTab({ posts = [] }) {
               </button>
 
               <img
-                src={selectedPost.image || "./placeholder.png"}
+                src={selectedPost.image || "./logo512.png"}
                 alt={selectedPost.title}
                 className="w-full h-60 object-cover rounded-lg mb-4"
               />
@@ -71,7 +71,10 @@ function PostingTab({ posts = [] }) {
                 <span className="text-xs text-gray-400">{selectedPost.date}</span>
               </div>
 
-              <p className="text-gray-700">{selectedPost.message}</p>
+              <div className="text-gray-700 whitespace-pre-line leading-relaxed text-[15px]">
+                {selectedPost.message}
+              </div>
+
             </div>
           </div>
         )}
