@@ -89,7 +89,7 @@ cpe-portal/
   - Displays **Grade Status**:
     - ✅ Passing
     - ❌ Failing
-    - 🔄 Convertible (with conditions)
+    - 🔄 Grade Status
 
 - **Future Features (Coming Soon)**
   - 🔒 Login/Signup authentication
