@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 function PostingTab({ posts = [] }) {
+  const [selectedPost, setSelectedPost] = useState(null);
+
   return (
     <div className="p-6">
       <h2 className="text-xl font-bold mb-6">📢 Department Announcements</h2>
@@ -8,7 +12,11 @@ function PostingTab({ posts = [] }) {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {posts.map((post, index) => (
-            <div key={index} className="bg-white shadow-md rounded-2xl overflow-hidden border border-gray-200">
+            <div
+              key={index}
+              className="bg-white shadow-md rounded-2xl overflow-hidden border border-gray-200 cursor-pointer hover:shadow-lg transition"
+              onClick={() => setSelectedPost(post)}
+            >
               <img
                 src={post.image || "./logo512.png"}
                 alt={post.title}
@@ -31,6 +39,39 @@ function PostingTab({ posts = [] }) {
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Modal */}
+      {selectedPost && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl p-6 w-11/12 md:w-2/3 lg:w-1/2 shadow-lg relative">
+            <button
+              onClick={() => setSelectedPost(null)}
+              className="absolute top-4 right-4 text-gray-600 hover:text-black text-2xl"
+            >
+              &times;
+            </button>
+
+            <img
+              src={selectedPost.image || "./logo512.png"}
+              alt={selectedPost.title}
+              className="w-full h-60 object-cover rounded-lg mb-4"
+            />
+
+            <h3 className="text-2xl font-bold mb-2">{selectedPost.title}</h3>
+            <div className="flex items-center space-x-2 mb-4">
+              <img 
+                src="./teacher.png" 
+                alt="Teacher" 
+                className="h-8 w-8 rounded-full object-cover"
+              />
+              <span className="text-sm text-gray-700">{selectedPost.uploaded_by}</span>
+              <span className="text-xs text-gray-400">{selectedPost.date}</span>
+            </div>
+
+            <p className="text-gray-700">{selectedPost.message}</p>
+          </div>
         </div>
       )}
     </div>
