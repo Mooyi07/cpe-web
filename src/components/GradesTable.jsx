@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // List of grades for each subject
 import grades from '../data/gradesData'; 
+import { average } from 'firebase/firestore';
 
 
 /**
@@ -55,7 +56,18 @@ const GradesTable = ({ onGradesChange, showTable = false }) => {
     const avg = parseFloat(average);
     return (avg > 4.89) || (avg > 4.79 && avg < 4.9 && belowSixCount < 4) || (avg > 4.69 && avg < 4.8 && belowSixCount < 3);
   };
+  
+  const gradesPerimeter = (average) => {
+    const avg = parseFloat(average);
+    if (avg > 7.99) {
+      return "Excellent";
+    } else if (avg < 8 && avg > 5.99){
+      return "Good";
+    } else {
+      return "Satisfactory";
+    }
 
+  }
   /**
    * Counts how many subjects have a final average below 6.0.
    * Updates the `belowSixCount` state.
@@ -87,7 +99,7 @@ const GradesTable = ({ onGradesChange, showTable = false }) => {
             const textColor = isFailed(average) ? 'text-red-600' : 'text-green-600';
             const convertStatus = isFailed(average)
               ? (convertible(average, belowSixCount) ? 'Convertible' : 'Not Convertible')
-              : 'Passing Grade';
+              : gradesPerimeter(average);
 
             return (
               <tr key={idx} className="text-center">
