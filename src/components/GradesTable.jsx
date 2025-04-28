@@ -54,20 +54,23 @@ const GradesTable = ({ onGradesChange, showTable = false }) => {
    */
   const convertible = (average, belowSixCount) => {
     const avg = parseFloat(average);
-    return (avg > 4.89) || (avg > 4.79 && avg < 4.9 && belowSixCount < 4) || (avg > 4.69 && avg < 4.8 && belowSixCount < 3);
+  
+    return (
+      avg > 4.89 ||
+      (avg > 4.79 && avg <= 4.89 && belowSixCount < 4) ||
+      (avg > 4.69 && avg <= 4.79 && belowSixCount < 3)
+    );
   };
   
   const gradesPerimeter = (average) => {
     const avg = parseFloat(average);
-    if (avg > 7.99) {
-      return "Excellent";
-    } else if (avg < 8 && avg > 5.99){
-      return "Good";
-    } else {
-      return "Satisfactory";
-    }
-
-  }
+  
+    if (avg >= 8) return "Excellent";
+    if (avg >= 6) return "Good";
+    
+    return "Satisfactory";
+  };
+  
   /**
    * Counts how many subjects have a final average below 6.0.
    * Updates the `belowSixCount` state.
