@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // List of grades for each subject
 import grades from '../data/gradesData'; 
-import { average } from 'firebase/firestore';
-
 
 /**
  * GradesTable Component
