@@ -84,7 +84,7 @@ const Login = () => {
           </button>
         </div>
         
-        <p className="text-center text-sm text-blue-700 mt-4 cursor-pointer hover:underline">
+        <p className="text-center text-sm text-black-700 mt-4 cursor-pointer hover:underline">
           Forgot your password? Click here
         </p>
       </form>
