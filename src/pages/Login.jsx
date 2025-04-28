@@ -25,9 +25,19 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#1c1e21] flex-col p-4">
+      {/* Spinning Logo */}
+      <div className="mb-4">
+        <img 
+          src="/logo512.png" // <- replace with your logo path
+          alt="Spinning Logo" 
+          className="h-20 w-20 animate-spin-slow" 
+        />
+      </div>
+
       <h1 className="text-2xl md:text-3xl font-bold mb-4 text-white text-center">
         Computer Engineering ERS Portal
       </h1>
+      
       <form onSubmit={handleLogin} className="bg-yellow-300 p-8 md:p-10 rounded shadow-md w-11/12 md:w-4/12">
         <h2 className="text-lg md:text-xl font-semibold mb-4 text-center">User Authentication</h2>
         
@@ -58,7 +68,7 @@ const Login = () => {
           className="w-full p-2 mb-3 border rounded"
         />
         
-        <div className="flex flex-col md:flex-row md:space-x-4 mb-5 w-full">
+        <div className="flex flex-col md:flex-row md:space-x-4 mb-3 w-full">
           <button
             type="button"
             onClick={handleReset}
@@ -74,11 +84,12 @@ const Login = () => {
           </button>
         </div>
         
-        <p className="text-center text-sm text-black-700 mt-4 cursor-pointer hover:underline">
+        <p className="text-center text-sm text-blue-700 mt-4 cursor-pointer hover:underline">
           Forgot your password? Click here
         </p>
       </form>
     </div>
+
 
   );
 };
