@@ -10,7 +10,7 @@ function PostingTab({ posts = [] }) {
           {posts.map((post, index) => (
             <div key={index} className="bg-white shadow-md rounded-2xl overflow-hidden border border-gray-200">
               <img
-                src={post.image || "./placeholder.png"}
+                src={post.image || "./logo512.png"}
                 alt={post.title}
                 className="w-full h-40 object-cover"
               />
