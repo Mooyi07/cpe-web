@@ -46,7 +46,7 @@ function PostingTab({ posts = [] }) {
       {/* Modal */}
       {selectedPost && (
           <div className="fixed inset-0 bg-gray-950 bg-opacity-40 flex items-center justify-center z-50 transition-opacity duration-300">
-            <div className="bg-white rounded-2xl p-6 w-11/12 md:w-2/3 lg:w-1/2 shadow-lg relative transform scale-95 opacity-0 animate-modal-pop">
+            <div className="bg-white rounded-2xl p-6 w-11/12 md:w-2/3 lg:w-1/2 max-h-[90vh] overflow-y-auto shadow-lg relative transform scale-95 opacity-0 animate-modal-pop">
               <button
                 onClick={() => setSelectedPost(null)}
                 className="absolute top-4 right-4 text-gray-600 hover:text-black text-2xl"
