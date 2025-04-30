@@ -26,6 +26,13 @@ const Schedule = () => {
     getTodaySchedule();
   }, []);
 
+  if (todaySchedule.length === 0) {
+    return (
+        <div className="p-4 bg-white text-center text-gray-500">Loading schedule...</div>
+    );
+  }
+  
+
   return (
     <div className="flex-1 mt-2 p-4 bg-white shadow rounded border border-gray-200">
       <h2 className="text-xl font-semibold mb-2">{currentDate}</h2>

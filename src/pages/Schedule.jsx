@@ -116,6 +116,14 @@ const Schedule = () => {
     };
     return colors[subject] || "bg-gray-100";
   };
+  
+  if (schedule.length === 0) {
+    return (
+      <Layout>
+        <div className="p-4 text-center text-gray-500">Loading schedule...</div>
+      </Layout>
+    );
+  }  
 
   return (
     <Layout>
