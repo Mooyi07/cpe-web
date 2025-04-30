@@ -37,7 +37,7 @@ const Dashboard = () => {
 
       <div className="flex flex-col lg:flex-row w-full gap-4 mb-4">
         {/* Grades Summary */}
-        <div className={`flex-1 flex flex-col p-4 m-2 rounded text-black ${hasFailed ? 'bg-red-100' : 'bg-green-100'}`}>
+        <div className={`flex-1 flex flex-col p-4 m-2 rounded text-black ${hasFailed ? 'bg-[#FD8A8A]' : 'bg-[`#C6DCBA]'}`}>
           <strong>Grades Summary:</strong>
           <div className="flex-1 mt-2 p-4 bg-white shadow rounded border border-gray-200">
             {hasFailed ? (
@@ -56,7 +56,7 @@ const Dashboard = () => {
         </div>
 
         {/* Important Announcements */}
-        <div className="flex-1 flex flex-col p-4 m-2 rounded bg-yellow-100 text-black">
+        <div className="flex-1 flex flex-col p-4 m-2 rounded bg-[#F8DE7E] text-black">
           <strong>Important Announcements:</strong>
           <div className="flex-1 mt-2 p-4 bg-white shadow rounded border border-gray-200">
             {importantAnnouncements.map((announcement, index) => (
@@ -72,7 +72,7 @@ const Dashboard = () => {
       
       <div className="flex flex-col lg:flex-row w-full gap-4 mb-4">
         {/* Schedule for Today */}
-        <div className="flex-1 flex flex-col p-4 m-2 rounded bg-blue-100 text-black">
+        <div className="flex-1 flex flex-col p-4 m-2 rounded bg-[#0096FF] text-black">
           <strong>Schedule Today:</strong>
           <Schedule />
         </div>
