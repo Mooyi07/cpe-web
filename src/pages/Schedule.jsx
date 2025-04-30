@@ -76,7 +76,7 @@ const Schedule = () => {
     scheduleMap[day][startIndex] = {
       content: subject === "Lunch Break"
         ? "Lunch Break"
-        : `${subject_code}\n${subject}\nProf. ${prof}\nRoom: ${room}`,
+        : `<i>${subject_code}</i>\n<b>${subject}</b>\nProf: ${prof.toUpperCase()}\nRoom: ${room}`,
       span: endIndex - startIndex,
       subject,
     };
@@ -147,7 +147,7 @@ const Schedule = () => {
                         className={`w-[100px] border border-gray-300 p-2 whitespace-pre-line align-middle ${getColor(cell.subject)}`}
                         rowSpan={cell.span}
                       >
-                        {cell.content}
+                        <span dangerouslySetInnerHTML={{ __html: cell.content }} />
                       </td>
                     );
                   }
