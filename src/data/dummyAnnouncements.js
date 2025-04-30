@@ -27,19 +27,3 @@ export const announcements = [
             `
     },
   ];
-
-  export const posts = [
-    {
-      title: "Important Reminders",
-      uploaded_by: "Jayson John Quintanilla",
-      date: "December 5, 2024",
-      message: `
-  To all irregulars (students who have failed subjects).
-  
-  Double check your curriculum since it is your responsibility to check all your subjects. Be strategic in the subjects you want to take. 
-  Indi ko gusto nga sa graduation pa kamo mangayo bulig kay kulang pa kamo subject.
-      `,
-      image: "", // optional if you want to add an image later
-    },
-  ];
-  
