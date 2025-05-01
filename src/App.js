@@ -5,16 +5,15 @@ import Dashboard from './pages/Dashboard'; // Dashboard route
 import Schedule from './pages/Schedule'; // Schedule route
 import Grades from './pages/Grades'; // Grades route
 import Announcement from './pages/Announcement'; // Announcement route
-// import CodePlayground from './components/CodePlayground/CodePlayground';
-// import PostsMessaging from './components/PostsMessaging/PostsMessaging';
-// import Notifications from './components/Notifications/Notifications';
+import Profile from './pages/Profile'; // Profile route
+import Settings from './pages/Settings'; // Settings route
+import NotFound from './pages/NotFound'; // NotFound route
 
 import './tailwind.output.css';
 
 function App() {
 
   return (
-    
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
@@ -22,6 +21,9 @@ function App() {
         <Route path="/schedule" element={<Schedule />} />
         <Route path="/grades" element={<Grades />} />
         <Route path="/announcement" element={<Announcement />} />
+        <Route path="/profile" element={<Profile />} /> {/* Profile route */}
+        <Route path="/settings" element={<Settings />} /> {/* Settings route */}
+        <Route path="*" element={<NotFound />} /> {/* Catch-all route for unmatched URLs */}
       </Routes>
     </Router>
   );

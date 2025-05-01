@@ -19,7 +19,6 @@ const AppRoutes = () => {
       <Route path="/announcement" element={<Layout><Announcement /></Layout>} />
       <Route path="/profile" element={<Layout><Profile /></Layout>} />
       <Route path="/settings" element={<Layout><Settings /></Layout>} />
-      
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
