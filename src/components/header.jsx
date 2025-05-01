@@ -1,24 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
+  const closeDropdown = () => setIsOpen(false);
+
   const handleProfileClick = () => {
     navigate('/profile');
+    closeDropdown();
   };
 
   const handleSettingsClick = () => {
     navigate('/settings');
+    closeDropdown();
   };
 
   const handleLogoutClick = () => {
-    // Add logout logic (optional)
+    // Optional: clear session/token here
     navigate('/');
+    closeDropdown();
   };
+
+  // Optional: Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <header className="flex justify-between items-center text-white bg-[#1c1e21] p-2 w-full h-16 relative">
@@ -36,7 +55,10 @@ const Header = () => {
           onClick={toggleDropdown}
         />
         {isOpen && (
-          <div className="absolute right-0 top-14 mt-2 w-48 bg-white text-black rounded-md shadow-lg z-50">
+          <div
+            ref={dropdownRef}
+            className="absolute right-0 top-14 mt-2 w-48 bg-white text-black rounded-md shadow-lg z-50"
+          >
             <ul>
               <li
                 className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
