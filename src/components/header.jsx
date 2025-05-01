@@ -1,9 +1,24 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleDropdown = () => setIsOpen(!isOpen);
+
+  const handleProfileClick = () => {
+    navigate('/profile');
+  };
+
+  const handleSettingsClick = () => {
+    navigate('/settings');
+  };
+
+  const handleLogoutClick = () => {
+    // Add logout logic (optional)
+    navigate('/');
+  };
 
   return (
     <header className="flex justify-between items-center text-white bg-[#1c1e21] p-2 w-full h-16 relative">
@@ -23,9 +38,24 @@ const Header = () => {
         {isOpen && (
           <div className="absolute right-0 top-14 mt-2 w-48 bg-white text-black rounded-md shadow-lg z-50">
             <ul>
-              <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Profile</li>
-              <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Settings</li>
-              <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Logout</li>
+              <li
+                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                onClick={handleProfileClick}
+              >
+                Profile
+              </li>
+              <li
+                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                onClick={handleSettingsClick}
+              >
+                Settings
+              </li>
+              <li
+                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                onClick={handleLogoutClick}
+              >
+                Logout
+              </li>
             </ul>
           </div>
         )}
