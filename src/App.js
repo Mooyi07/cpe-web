@@ -21,9 +21,9 @@ function App() {
         <Route path="/schedule" element={<Schedule />} />
         <Route path="/grades" element={<Grades />} />
         <Route path="/announcement" element={<Announcement />} />
-        <Route path="/profile" element={<Profile />} /> {/* Profile route */}
-        <Route path="/settings" element={<Settings />} /> {/* Settings route */}
-        <Route path="*" element={<NotFound />} /> {/* Catch-all route for unmatched URLs */}
+        <Route path="/profile" element={<Profile />} /> 
+        <Route path="/settings" element={<Settings />} /> 
+        <Route path="*" element={<NotFound />} /> 
       </Routes>
     </Router>
   );

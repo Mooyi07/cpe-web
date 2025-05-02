@@ -38,7 +38,7 @@ const Schedule = () => {
         maxMinutes = endMinutes;
       }
     });
-  
+
     // Convert maxMinutes to Date object
     const endHour = Math.floor(maxMinutes / 60);
     const endMin = maxMinutes % 60;
@@ -86,7 +86,8 @@ const Schedule = () => {
     }
   });
 
-  
+  // ADD DAILY AND WEEKLY SCHEDULE (JQuery)
+
   const exportSched = () => {
     const element = document.getElementById('sched');
   
