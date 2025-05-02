@@ -69,6 +69,10 @@ cpe-portal/
 │   │   ├── PostingTab.jsx
 │   │   ├── Sidebar.jsx
 │   │   └── GradesTable.jsx
+│   ├── data/
+│   │   ├── dummyAnnouncements.js
+│   │   ├── gradesData.js
+│   │   └── scheduleData.js
 │   ├── App.jsx
 │   ├── index.js
 │   ├── firebase.js
