@@ -4,11 +4,12 @@ import { fetchScheduleData } from '../data/scheduleData';
 const Schedule = () => {
   const [todaySchedule, setTodaySchedule] = useState([]);
   const [currentDate, setCurrentDate] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getTodaySchedule = async () => {
       const allData = await fetchScheduleData();
-
+  
       const today = new Date();
       const dayName = today.toLocaleDateString('en-US', { weekday: 'long' });
       setCurrentDate(today.toLocaleDateString('en-US', {
@@ -17,20 +18,24 @@ const Schedule = () => {
         month: 'long',
         day: 'numeric',
       }));
-
+  
       const filtered = allData
-        .filter(item => item.day === dayName && item.subject !== 'Lunch Break'); // Exclude lunch
+        .filter(item => item.day === dayName && item.subject !== 'Lunch Break');
+  
       setTodaySchedule(filtered);
+      setLoading(false); // Set loading to false after data is fetched
     };
-
+  
     getTodaySchedule();
   }, []);
+  
 
-  if (todaySchedule.length === 0) {
+  if (loading) {
     return (
-        <div className="p-4 bg-white text-center text-gray-500">Loading schedule...</div>
+      <div className="p-4 bg-white text-center text-gray-500">Loading schedule...</div>
     );
   }
+  
   
 
   return (

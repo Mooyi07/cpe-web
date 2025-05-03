@@ -105,18 +105,12 @@ const Schedule = () => {
   };  
 
   const getColor = subject => {
-    const colors = {
-      "Computer Programming 5": "bg-blue-200",
-      "Numerical Methods": "bg-green-200",
-      "Logic Circuits and Design": "bg-yellow-200",
-      "Software Design": "bg-purple-200",
-      "Dynamics of Rigid Bodies": "bg-red-200",
-      "Art Appreciation": "bg-pink-200",
-      "Computer Engineering Drafting and Design": "bg-teal-200",
-      "Lunch Break": "bg-orange-200 italic text-center font-semibold",
-    };
-    return colors[subject] || "bg-gray-100";
+    if (subject === "Lunch Break") {
+      return "bg-orange-100 italic text-center font-semibold";
+    }
+    return "bg-blue-100"; // Use a single color for all subjects
   };
+  
   
   if (schedule.length === 0) {
     return (
