@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '../layouts/Layout';
 
 const Profile = () => {
-  const profile = {
+  const [profile, setProfile] = useState({
     fullName: "Lanz Joseph Tarrosa Villanueva",
-    birthDate: "03/19/2002",
+    birthDate: "2002-03-19",
     age: 23,
     gender: "Male",
     citizenship: "Filipino",
@@ -32,6 +32,24 @@ const Profile = () => {
     isPWD: false,
     isIP: false,
     isListahan: false,
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProfile((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleAddressChange = (e) => {
+    const { name, value } = e.target;
+    setProfile((prev) => ({
+      ...prev,
+      address: { ...prev.address, [name]: value },
+    }));
+  };
+
+  const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target;
+    setProfile((prev) => ({ ...prev, [name]: checked }));
   };
 
   return (
@@ -41,51 +59,100 @@ const Profile = () => {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-3xl font-bold">Personal Information</h2>
-              <p className="text-gray-400 text-sm">Step 1 of 4</p>
             </div>
-            <img
-              src="/user.png"
-              alt="Profile"
-              className="rounded-lg object-cover w-24 h-28 border"
-            />
+            <img src="/user.png" alt="Profile" className="rounded-lg object-cover w-24 h-28 border" />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
               <label className="block text-gray-400">Full Name</label>
-              <div className="mt-1">{profile.fullName}</div>
+              <input
+                type="text"
+                name="fullName"
+                value={profile.fullName}
+                onChange={handleChange}
+                className="mt-1 w-full p-2 rounded bg-gray-700 text-white"
+              />
             </div>
             <div>
               <label className="block text-gray-400">Learner Reference No.</label>
-              <div className="mt-1">{profile.learnerRefNo}</div>
+              <input
+                type="text"
+                name="learnerRefNo"
+                value={profile.learnerRefNo}
+                onChange={handleChange}
+                className="mt-1 w-full p-2 rounded bg-gray-700 text-white"
+              />
             </div>
             <div>
               <label className="block text-gray-400">Birth Date</label>
-              <div className="mt-1">{profile.birthDate}</div>
+              <input
+                type="date"
+                name="birthDate"
+                value={profile.birthDate}
+                onChange={handleChange}
+                className="mt-1 w-full p-2 rounded bg-gray-700 text-white"
+              />
             </div>
             <div>
               <label className="block text-gray-400">Age</label>
-              <div className="mt-1">{profile.age}</div>
+              <input
+                type="number"
+                name="age"
+                value={profile.age}
+                onChange={handleChange}
+                className="mt-1 w-full p-2 rounded bg-gray-700 text-white"
+              />
             </div>
             <div>
               <label className="block text-gray-400">Gender</label>
-              <div className="mt-1">{profile.gender}</div>
+              <input
+                type="text"
+                name="gender"
+                value={profile.gender}
+                onChange={handleChange}
+                className="mt-1 w-full p-2 rounded bg-gray-700 text-white"
+              />
             </div>
             <div>
               <label className="block text-gray-400">Birth Place</label>
-              <div className="mt-1">{profile.birthPlace}</div>
+              <input
+                type="text"
+                name="birthPlace"
+                value={profile.birthPlace}
+                onChange={handleChange}
+                className="mt-1 w-full p-2 rounded bg-gray-700 text-white"
+              />
             </div>
             <div>
               <label className="block text-gray-400">Citizenship</label>
-              <div className="mt-1">{profile.citizenship}</div>
+              <input
+                type="text"
+                name="citizenship"
+                value={profile.citizenship}
+                onChange={handleChange}
+                className="mt-1 w-full p-2 rounded bg-gray-700 text-white"
+              />
             </div>
             <div>
               <label className="block text-gray-400">Religion</label>
-              <div className="mt-1">{profile.religion}</div>
+              <input
+                type="text"
+                name="religion"
+                value={profile.religion}
+                onChange={handleChange}
+                className="mt-1 w-full p-2 rounded bg-gray-700 text-white"
+              />
             </div>
             <div>
               <label className="block text-gray-400">Civil Status</label>
-              <div className="mt-1">{profile.civilStatus}</div>
+              <input
+                type="text"
+                name="civilStatus"
+                value={profile.civilStatus}
+                onChange={handleChange}
+                className="mt-1 w-full p-2 rounded bg-gray-700 text-white"
+              />
             </div>
           </div>
 
@@ -93,20 +160,44 @@ const Profile = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <label className="block text-gray-400">Email Address</label>
-              <div className="mt-1">{profile.email}</div>
+              <label className="block text-gray-400">Email</label>
+              <input
+                type="email"
+                name="email"
+                value={profile.email}
+                onChange={handleChange}
+                className="mt-1 w-full p-2 rounded bg-gray-700 text-white"
+              />
             </div>
             <div>
-              <label className="block text-gray-400">Facebook Account</label>
-              <div className="mt-1">{profile.facebook}</div>
+              <label className="block text-gray-400">Facebook</label>
+              <input
+                type="text"
+                name="facebook"
+                value={profile.facebook}
+                onChange={handleChange}
+                className="mt-1 w-full p-2 rounded bg-gray-700 text-white"
+              />
             </div>
             <div>
-              <label className="block text-gray-400">Mobile Number</label>
-              <div className="mt-1">{profile.contact}</div>
+              <label className="block text-gray-400">Contact</label>
+              <input
+                type="text"
+                name="contact"
+                value={profile.contact}
+                onChange={handleChange}
+                className="mt-1 w-full p-2 rounded bg-gray-700 text-white"
+              />
             </div>
             <div>
               <label className="block text-gray-400">Landline</label>
-              <div className="mt-1">{profile.landline}</div>
+              <input
+                type="text"
+                name="landline"
+                value={profile.landline}
+                onChange={handleChange}
+                className="mt-1 w-full p-2 rounded bg-gray-700 text-white"
+              />
             </div>
           </div>
 
@@ -115,19 +206,43 @@ const Profile = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
               <label className="block text-gray-400">Campus</label>
-              <div className="mt-1">{profile.campus}</div>
+              <input
+                type="text"
+                name="campus"
+                value={profile.campus}
+                onChange={handleChange}
+                className="mt-1 w-full p-2 rounded bg-gray-700 text-white"
+              />
             </div>
             <div>
               <label className="block text-gray-400">Department</label>
-              <div className="mt-1">{profile.department}</div>
+              <input
+                type="text"
+                name="department"
+                value={profile.department}
+                onChange={handleChange}
+                className="mt-1 w-full p-2 rounded bg-gray-700 text-white"
+              />
             </div>
             <div>
               <label className="block text-gray-400">Course</label>
-              <div className="mt-1">{profile.course}</div>
+              <input
+                type="text"
+                name="course"
+                value={profile.course}
+                onChange={handleChange}
+                className="mt-1 w-full p-2 rounded bg-gray-700 text-white"
+              />
             </div>
             <div>
               <label className="block text-gray-400">Financial Support</label>
-              <div className="mt-1">{profile.financialSupport}</div>
+              <input
+                type="text"
+                name="financialSupport"
+                value={profile.financialSupport}
+                onChange={handleChange}
+                className="mt-1 w-full p-2 rounded bg-gray-700 text-white"
+              />
             </div>
           </div>
 
@@ -136,20 +251,50 @@ const Profile = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
               <label className="block text-gray-400">Permanent Address</label>
-              <div className="mt-1">
-                {profile.address.unit}, {profile.address.street}, {profile.address.barangay}, {profile.address.city}, {profile.address.province}, {profile.address.zip}
-              </div>
+              <textarea
+                name="unit"
+                value={`${profile.address.unit}, ${profile.address.street}, ${profile.address.barangay}, ${profile.address.city}, ${profile.address.province}, ${profile.address.zip}`}
+                readOnly
+                className="mt-1 w-full p-2 rounded bg-gray-700 text-white"
+              />
             </div>
             <div>
-              <label className="block text-gray-400">Congressional District</label>
-              <div className="mt-1">{profile.address.district}</div>
+              <label className="block text-gray-400">District</label>
+              <input
+                type="text"
+                name="district"
+                value={profile.address.district}
+                onChange={handleAddressChange}
+                className="mt-1 w-full p-2 rounded bg-gray-700 text-white"
+              />
             </div>
           </div>
 
-          <div className="pt-4 text-sm text-gray-400 space-y-1">
-            <p>Indigenous People (IP): {profile.isIP ? "Yes" : "No"}</p>
-            <p>Person with Disabilities (PWD): {profile.isPWD ? "Yes" : "No"}</p>
-            <p>Listahan: {profile.isListahan ? "Yes" : "No"}</p>
+          <div className="pt-4 text-sm text-gray-400 space-y-2">
+            <label className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                name="isIP"
+                checked={profile.isIP}
+                onChange={handleCheckboxChange}
+              /> Indigenous People (IP)
+            </label>
+            <label className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                name="isPWD"
+                checked={profile.isPWD}
+                onChange={handleCheckboxChange}
+              /> Person with Disabilities (PWD)
+            </label>
+            <label className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                name="isListahan"
+                checked={profile.isListahan}
+                onChange={handleCheckboxChange}
+              /> Listahan
+            </label>
           </div>
         </div>
       </div>
