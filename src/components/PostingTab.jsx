@@ -4,9 +4,26 @@ import './postingtab.css';
 function PostingTab({ posts = [] }) {
   const [selectedPost, setSelectedPost] = useState(null);
 
+  const [showForm, setShowForm] = useState(false);
+  const [newPost, setNewPost] = useState({
+    title: '',
+    message: '',
+    uploaded_by: '',
+    date: '',
+    image: ''
+  });
+
   return (
     <div className="p-6">
-      <h2 className="text-xl font-bold mb-6">📢 Department Announcements</h2>
+      <div className="flex align-center justify-between mb-4">
+        <h2 className="text-xl font-bold mb-6">📢 Department Announcements</h2> 
+        <button
+          onClick={() => setShowForm(true)}
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+        >
+          ➕ New Announcement
+        </button>
+      </div>
 
       {posts.length === 0 ? (
         <p className="text-gray-600">No announcements at the moment.</p>
