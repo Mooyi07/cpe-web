@@ -1,7 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, use } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {firstName, lastName, middleName, idNumber} from '../data/userData';
 
 const Header = () => {
+  const formattedLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
+
+  const firstInitial = firstName.charAt(0).toUpperCase();
+
+  const username = formattedLastName + " " + firstInitial + ".";
+
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
@@ -47,7 +54,7 @@ const Header = () => {
       </div>
 
       <div className="flex items-center space-x-4 relative">
-        <h1 className="text-md">Welcome, Computer Engineer</h1>
+        <h1 className="text-md">Welcome, {username}</h1>
         <img
           src="/user.png"
           alt="User"
