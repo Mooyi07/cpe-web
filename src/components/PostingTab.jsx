@@ -1,5 +1,6 @@
 import { useState } from "react";
 import './postingtab.css';
+import {firstName, lastName, middleName, idNumber} from '../data/userData';
 
 function PostingTab({ posts = [] }) {
   const [selectedPost, setSelectedPost] = useState(null);
@@ -8,7 +9,7 @@ function PostingTab({ posts = [] }) {
   const [newPost, setNewPost] = useState({
     title: '',
     message: '',
-    uploaded_by: '',
+    uploaded_by: lastName + ", " + firstName + " " + middleName.at(0) + ". (" + idNumber + ")",
     date: '',
     image: ''
   });

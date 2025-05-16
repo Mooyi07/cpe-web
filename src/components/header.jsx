@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, use } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {firstName, lastName, middleName, idNumber} from '../data/userData';
+import {firstName, lastName} from '../data/userData';
 
 const Header = () => {
   const formattedLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
