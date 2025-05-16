@@ -132,7 +132,7 @@ function PostingTab({ posts = [] }) {
                   placeholder="Uploaded by"
                   className="w-full p-2 border rounded"
                   value={newPost.uploaded_by}
-                  onChange={(e) => setNewPost({ ...newPost, uploaded_by: e.target.value })}
+                  disabled
                   required
                 />
         
