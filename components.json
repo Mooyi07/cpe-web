@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "cpe-web",
+  "project": "cpe-web",
+  "framework": "react",
+  "style": "new-york",
+  "tailwind": {
+    "config": "tailwind.config.js",
+    "css": "src/index.css",
+    "baseColor": "zinc",
+    "cssVariables": true
+  },
+  "aliases": {
+    "@/components": "src/components",
+    "@/lib": "src/lib"
+  }
+}
