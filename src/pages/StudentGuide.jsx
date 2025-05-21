@@ -1,9 +1,11 @@
 import React from 'react';
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from '../components/ui/Card';
 import { ExternalLink } from "lucide-react";
+import Layout from "../layouts/Layout";
 
 const StudentGuide = () => {
   return (
+    <Layout>
     <div className="max-w-4xl mx-auto p-6 space-y-6">
       <h1 className="text-3xl font-bold text-center">Supervised Industrial Training (SIT) Guide</h1>
 
@@ -65,6 +67,7 @@ const StudentGuide = () => {
         </CardContent>
       </Card>
     </div>
+    </Layout>
   );
 };
 

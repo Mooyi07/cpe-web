@@ -16,6 +16,7 @@ const Sidebar = () => {
         <Link to="/grades" className={linkClass('/grades')}>Grades</Link>
         <Link to="/schedule" className={linkClass('/schedule')}>Schedule</Link>
         <Link to="/announcement" className={linkClass('/announcement')}>Announcement</Link>
+        <Link to="/student-guide" className={linkClass('/student-guide')}>Student Guide</Link>
       </nav>
     </aside>
   );
