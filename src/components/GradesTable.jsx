@@ -82,19 +82,19 @@ const GradesTable = ({ onGradesChange, showTable = false }) => {
 
   return (
     <div>
-      <table className="min-w-full border border-gray-300 rounded mb-4">
-        <thead className="bg-gray-100">
+      <table className="min-w-full border border-gray-300 dark:border-gray-700 rounded mb-4">
+        <thead className="bg-gray-100 dark:bg-gray-800 dark:text-white">
           <tr>
-            <th className="p-2 border">Subject Code</th>
-            <th className="p-2 border">Subject Description</th>
-            <th className="p-2 border">Prelim</th>
-            <th className="p-2 border">Midterm</th>
-            <th className="p-2 border">Endterm</th>
-            <th className="p-2 border">Final Average</th>
-            <th className="p-2 border">Grade Status</th>
+            <th className="p-2 border dark:border-gray-700">Subject Code</th>
+            <th className="p-2 border dark:border-gray-700">Subject Description</th>
+            <th className="p-2 border dark:border-gray-700">Prelim</th>
+            <th className="p-2 border dark:border-gray-700">Midterm</th>
+            <th className="p-2 border dark:border-gray-700">Endterm</th>
+            <th className="p-2 border dark:border-gray-700">Final Average</th>
+            <th className="p-2 border dark:border-gray-700">Grade Status</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="dark:text-white">
           {grades.map((grade, idx) => {
             const average = getFinalAverage(grade);
             const textColor = isFailed(average) ? 'text-red-600' : 'text-green-600';
@@ -103,14 +103,14 @@ const GradesTable = ({ onGradesChange, showTable = false }) => {
               : gradesPerimeter(average);
 
             return (
-              <tr key={idx} className="text-center">
-                <td className="text-left p-2 border">{grade.subCode}</td>
-                <td className="text-left p-2 border">{grade.name}</td>
-                <td className="p-2 border">{grade.prelim}</td>
-                <td className="p-2 border">{grade.midterm}</td>
-                <td className="p-2 border">{grade.endterm}</td>
-                <td className={`p-2 border font-semibold ${textColor}`}>{average}</td>
-                <td className="p-2 border font-semibold">{convertStatus}</td>
+              <tr key={idx} className="text-center even:bg-gray-50 dark:even:bg-gray-800">
+                <td className="text-left p-2 border dark:border-gray-700">{grade.subCode}</td>
+                <td className="text-left p-2 border dark:border-gray-700">{grade.name}</td>
+                <td className="p-2 border dark:border-gray-700">{grade.prelim}</td>
+                <td className="p-2 border dark:border-gray-700">{grade.midterm}</td>
+                <td className="p-2 border dark:border-gray-700">{grade.endterm}</td>
+                <td className={`p-2 border font-semibold dark:border-gray-700 ${textColor}`}>{average}</td>
+                <td className="p-2 border font-semibold dark:border-gray-700">{convertStatus}</td>
               </tr>
             );
           })}
