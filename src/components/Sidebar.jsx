@@ -5,12 +5,14 @@ const Sidebar = () => {
   const location = useLocation();
 
   const linkClass = (path) =>
-    `block p-2 rounded ${
-      location.pathname === path ? 'bg-blue-900 text-white' : 'hover:bg-blue-100'
+    `block p-2 rounded transition-colors duration-200 ${
+      location.pathname === path
+        ? 'bg-blue-900 text-white dark:bg-blue-600 dark:text-white'
+        : 'hover:bg-blue-100 dark:hover:bg-gray-700 dark:text-gray-200'
     }`;
 
   return (
-    <aside className="w-64 bg-white border-r p-4 h-screen sticky top-0">
+    <aside className="w-64 bg-white border-r border-gray-200 dark:bg-gray-900 dark:border-gray-700 p-4 h-screen sticky top-0">
       <nav className="space-y-2">
         <Link to="/dashboard" className={linkClass('/dashboard')}>Dashboard</Link>
         <Link to="/grades" className={linkClass('/grades')}>Grades</Link>
