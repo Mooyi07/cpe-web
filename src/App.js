@@ -9,6 +9,7 @@ import Profile from './pages/Profile'; // Profile route
 import Settings from './pages/Settings'; // Settings route
 import NotFound from './pages/NotFound'; // NotFound route
 import StudentGuide from './pages/StudentGuide'; // NotFound route
+import TeachersPage from './pages/Teachers';
 
 import './tailwind.output.css';
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/profile" element={<Profile />} /> 
         <Route path="/settings" element={<Settings />} />
         <Route path="/student-guide" element={<StudentGuide />} />
+        <Route path="/teachers" element={<TeachersPage />} />
         <Route path="*" element={<NotFound />} /> 
       </Routes>
     </Router>

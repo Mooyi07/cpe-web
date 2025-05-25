@@ -120,12 +120,16 @@ const Schedule = () => {
     );
   }  
 
+  // Compact mode add feature
   return (
     <Layout>
       <div className="p-4 overflow-x-auto">
         <div className='flex justify-between items-center mb-4'>
           <h2 className="text-xl font-semibold">Weekly Schedule</h2>
-          <button onClick={exportSched} className="bg-blue-500 text-white rounded p-2">Export Schedule</button>
+          <div className="flex">
+            <button onlick="" className='bg-blue-500 text-white rounded p-2 mr-5'> Mode</button>
+            <button onClick={exportSched} className="bg-blue-500 text-white rounded p-2">Export Schedule</button>
+          </div>
         </div>
         <table id='sched' className="min-w-full table-fixed border border-gray-300 text-sm">
           <thead>
