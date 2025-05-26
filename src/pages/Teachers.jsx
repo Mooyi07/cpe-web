@@ -1,28 +1,76 @@
 import Layout from "../layouts/Layout";
 
 const teachers = [
-    { name: "Engr. Maria Santos", status: "In Faculty" },
-    { name: "Engr. John Dela Cruz", status: "In Class" },
-    { name: "Engr. Anna Reyes", status: "In Faculty" },
-    { name: "Engr. Carlo Gutierrez", status: "In Class" },
+  {
+    name: "Engr. Jayson John J. Quintanilla",
+    role: "Program Head",
+    status: "IN FACULTY",
+    statusColor: "text-green-600",
+    isHead: true,
+  },
+  {
+    name: "Engr. Azriel Martin Padernal",
+    role: "Professor",
+    status: "IN FACULTY",
+    statusColor: "text-green-600",
+  },
+  {
+    name: "Engr. Brian Jay R. Lumauag",
+    role: "Professor",
+    status: "IN CLASS",
+    statusColor: "text-yellow-500",
+  },
+  {
+    name: "Engr. Allen Joseph C. Apawan",
+    role: "Professor",
+    status: "OFF CAMPUS",
+    statusColor: "text-red-600",
+  },
 ];
 
 export default function TeachersPage() {
-    return (
-        <Layout>
-            <div className="p-6">
-                <h1 className="text-3xl font-bold mb-6">CPE Faculty</h1>
-                <div className="grid gap-4 md:grid-cols-2">
-                    {teachers.map((teacher, index) => (
-                        <div key={index} className="p-4 border rounded-xl shadow-md">
-                            <h2 className="text-xl font-semibold">{teacher.name}</h2>
-                            <p className={`mt-2 font-medium ${teacher.status === "In Class" ? "text-red-500" : "text-green-600"}`}>
-                                {teacher.status}
-                            </p>
-                        </div>
-                    ))}
-                </div>
+  const head = teachers.find((t) => t.isHead);
+  const subs = teachers.filter((t) => !t.isHead);
+
+  return (
+    <Layout>
+      <div className="bg-gray-100 min-h-screen flex flex-col items-center py-16 px-4">
+        {/* Head Box */}
+        <div className="flex flex-col items-center">
+          <div className="bg-white rounded-md shadow-md border px-6 py-4 text-center">
+            <div className="w-20 h-20 border-2 border-black rounded-full mx-auto mb-2" />
+            <p className="font-medium">{head.name}</p>
+            <p className="font-semibold">{head.role}</p>
+            <p className={`font-bold ${head.statusColor}`}>{head.status}</p>
+          </div>
+
+          {/* Vertical Line */}
+          <div className="hidden md:block w-1 h-10 bg-black"></div>
+
+          {/* Horizontal Line */}
+          <div className="hidden md:block w-[625px] h-1 bg-black relative">
+          {/* Position vertical lines */}
+            <div className="absolute top-0 left-0 w-1 h-7 bg-black"></div>
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-7 bg-black"></div>
+            <div className="absolute top-0 right-0 w-1 h-7 bg-black"></div>
+          </div>
+
+        </div>
+
+        {/* Subordinate Boxes */}
+        <div className="flex flex-col gap-8 mt-6 md:flex-row md:gap-16 items-center">
+          {subs.map((t, i) => (
+            <div key={i} className="flex flex-col items-center">
+              <div className="bg-white rounded-md shadow-md border px-6 py-4 text-center">
+                <div className="w-20 h-20 border-2 border-black rounded-full mx-auto mb-2" />
+                <p className="font-medium">{t.name}</p>
+                <p className="font-semibold">{t.role}</p>
+                <p className={`font-bold ${t.statusColor}`}>{t.status}</p>
+              </div>
             </div>
-        </Layout>
-    );
+          ))}
+        </div>
+      </div>
+    </Layout>
+  );
 }
