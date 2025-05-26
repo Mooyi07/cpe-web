@@ -64,8 +64,9 @@ const Schedule = () => {
     const startMinutes = normalizeTime(startStr);
     const endMinutes = normalizeTime(endStr);
 
-    const startIndex = timeSlots.findIndex(slot => normalizeTime(slot) === startMinutes);
-    const endIndex = timeSlots.findIndex(slot => normalizeTime(slot) === endMinutes);
+    const startIndex = timeSlots.findIndex(slot => normalizeTime(slot) >= startMinutes);
+    const endIndex = timeSlots.findIndex(slot => normalizeTime(slot) >= endMinutes);
+
 
     if (startIndex === -1 || endIndex === -1) return;
 
