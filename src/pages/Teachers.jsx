@@ -5,28 +5,30 @@ const teachers = [
     name: "Engr. Jayson John J. Quintanilla",
     role: "Program Head",
     status: "IN FACULTY",
-    statusColor: "text-green-600",
     isHead: true,
   },
   {
     name: "Engr. Azriel Martin Padernal",
     role: "Professor",
     status: "IN FACULTY",
-    statusColor: "text-green-600",
   },
   {
     name: "Engr. Brian Jay R. Lumauag",
     role: "Professor",
     status: "IN CLASS",
-    statusColor: "text-yellow-500",
   },
   {
     name: "Engr. Allen Joseph C. Apawan",
     role: "Professor",
     status: "OFF CAMPUS",
-    statusColor: "text-red-600",
   },
 ];
+
+const statusStyles = {
+  "IN FACULTY": "text-green-600",
+  "IN CLASS": "text-yellow-500",
+  "OFF CAMPUS": "text-red-600",
+};
 
 export default function TeachersPage() {
   const head = teachers.find((t) => t.isHead);
@@ -41,7 +43,7 @@ export default function TeachersPage() {
             <div className="w-20 h-20 border-2 border-black rounded-full mx-auto mb-2" />
             <p className="font-medium">{head.name}</p>
             <p className="font-semibold">{head.role}</p>
-            <p className={`font-bold ${head.statusColor}`}>{head.status}</p>
+            <p className={`font-bold ${statusStyles[head.status]}`}>{head.status}</p>
           </div>
 
           {/* Vertical Line */}
@@ -49,12 +51,10 @@ export default function TeachersPage() {
 
           {/* Horizontal Line */}
           <div className="hidden md:block w-[625px] h-1 bg-black relative">
-          {/* Position vertical lines */}
             <div className="absolute top-0 left-0 w-1 h-7 bg-black"></div>
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-7 bg-black"></div>
             <div className="absolute top-0 right-0 w-1 h-7 bg-black"></div>
           </div>
-
         </div>
 
         {/* Subordinate Boxes */}
@@ -65,7 +65,7 @@ export default function TeachersPage() {
                 <div className="w-20 h-20 border-2 border-black rounded-full mx-auto mb-2" />
                 <p className="font-medium">{t.name}</p>
                 <p className="font-semibold">{t.role}</p>
-                <p className={`font-bold ${t.statusColor}`}>{t.status}</p>
+                <p className={`font-bold ${statusStyles[t.status]}`}>{t.status}</p>
               </div>
             </div>
           ))}
