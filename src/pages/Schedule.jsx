@@ -99,11 +99,12 @@ const Schedule = () => {
   };
 
   const getColor = subject => {
-    if (subject === "Lunch Break") {
-      return "bg-orange-100 italic text-center font-semibold";
+  if (subject === "Lunch Break") {
+      return "bg-orange-100 dark:bg-orange-800 italic text-center font-semibold text-black dark:text-white";
     }
-    return "bg-blue-100";
+    return "bg-blue-500 dark:bg-blue-800 text-white";
   };
+
 
   if (schedule.length === 0) {
     return (
@@ -154,9 +155,13 @@ const Schedule = () => {
                     return (
                       <td
                         key={day}
-                        className={`w-[100px] border border-gray-300 p-2 whitespace-pre-line align-middle ${getColor(cell.subject)}`}
+                        className={`w-[100px] p-2 whitespace-pre-line align-middle 
+                          ${getColor(cell.subject)} 
+                          ${cell.subject === "Lunch Break" ? "" : "border border-gray-300"}`
+                        }
                         rowSpan={cell.span}
                       >
+
                         <span dangerouslySetInnerHTML={{ __html: cell.content }} />
                       </td>
                     );
