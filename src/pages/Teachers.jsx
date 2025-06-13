@@ -40,7 +40,7 @@ export default function TeachersPage() {
         {/* Head Box */}
         <div className="flex flex-col items-center">
           <div className="bg-white rounded-md shadow-md border px-6 py-4 text-center">
-            <div className="w-20 h-20 border-2 border-black rounded-full mx-auto mb-2" />
+            <div className="w-20 h-20 border-2 border-black rounded-full mx-auto mb-2"></div>
             <p className="font-medium">{head.name}</p>
             <p className="font-semibold">{head.role}</p>
             <p className={`font-bold ${statusStyles[head.status]}`}>{head.status}</p>
