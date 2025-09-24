@@ -13,7 +13,7 @@ const teachers = [
     status: "IN FACULTY",
   },
   {
-    name: "Engr. Brian Jay R. Lumauag",
+    name: "Engr. Crhiz Q. Salillas",
     role: "Professor",
     status: "IN CLASS",
   },
@@ -50,7 +50,7 @@ export default function TeachersPage() {
           <div className="hidden md:block w-1 h-10 bg-black"></div>
 
           {/* Horizontal Line */}
-          <div className="hidden md:block w-[625px] h-1 bg-black relative">
+          <div className="hidden md:block w-[600px] h-1 bg-black relative">
             <div className="absolute top-0 left-0 w-1 h-7 bg-black"></div>
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-7 bg-black"></div>
             <div className="absolute top-0 right-0 w-1 h-7 bg-black"></div>
