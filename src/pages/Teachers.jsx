@@ -36,7 +36,7 @@ export default function TeachersPage() {
 
   return (
     <Layout>
-      <div className="bg-gray-100 min-h-screen flex flex-col items-center py-16 px-4">
+      <div className="bg-gray-50 min-h-screen flex flex-col items-center py-16 px-4">
         {/* Head Box */}
         <div className="flex flex-col items-center">
           <div className="bg-white rounded-md shadow-md border px-6 py-4 text-center">
